@@ -7,3 +7,25 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r}
+library(ggplot2)
+library(dplyr)
+library(tidyverse)
+library(plyr)
+library(readxl)
+library(ggrepel)
+
+topDogsFull <- readxl::read_xlsx('KIB - Best in Show (public).xlsx', sheet='Best in show full sheet', range = cell_rows(1:88))
+
+
+topDogsFull$intelligence<- revalue(topDogsFull$intelligence, c("Above average" = "Clever", "Average" = "Dumb", "Brightest" = "Clever", "Excellent" = "Clever", "Fair" = "Dumb", "Lowest" = "Dumb"))
+levels(topDogsFull$Size) <- c("small", "medium", "large")
+topDogsFull$Size <- as.factor(topDogsFull$Size)
+
+topDogsFull$Size <- factor(topDogsFull$Size, levels = c("small", "medium", "large"))
+levels(topDogsFull$Size)
+
+ggplot(topDogsFull, aes(x = `datadog score`, y = Popularity, color = Category, shape = intelligence, label = Breed)) + geom_point(aes(size = Size)) + geom_text_repel(segment.size = .1, size = 2, color = "black") + xlab("Data Score") + ggtitle("Top Dogs with Popularity and Data Score")
+
+
+```
