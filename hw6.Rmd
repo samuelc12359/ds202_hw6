@@ -25,7 +25,8 @@ topDogsFull$Size <- as.factor(topDogsFull$Size)
 topDogsFull$Size <- factor(topDogsFull$Size, levels = c("small", "medium", "large"))
 levels(topDogsFull$Size)
 
-ggplot(topDogsFull, aes(x = `datadog score`, y = Popularity, color = Category, shape = intelligence, label = Breed)) + geom_point(aes(size = Size)) + geom_text_repel(segment.size = .1, size = 2, color = "black") + xlab("Data Score") + ggtitle("Top Dogs with Popularity and Data Score")
+ggplot(topDogsFull, aes(x = `datadog score`, y = Popularity, color = Category, shape = intelligence, label = Breed)) + geom_point(aes(size = Size)) + geom_text_repel(segment.size = .1, size = 2, color = "black") + xlab("Data Score") + ggtitle("Top Dogs with Popularity and Data Score") + labs(subtitle="Data Score is Calculated using: \nIntelligence, Costs, Longevity, Grooming, Ailments, and Appetite")
 
-
+?subtitle
 ```
+The Data Score is made by a combination of 
